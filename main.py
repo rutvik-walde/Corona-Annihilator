@@ -34,7 +34,7 @@ enemyX = []
 enemyY = []
 enemyX_change = []
 enemyY_change = []
-num_of_enemies = 6
+num_of_enemies = 7
 
 for i in range(num_of_enemies):
     enemyImg.append(pygame.image.load('enemy.png'))
@@ -71,7 +71,7 @@ def show_score(x, y):
     score = font.render("Score : " + str(score_value), True, (255, 255, 255))
     screen.blit(score, (x, y))
 
-
+    
 def game_over_text():
     over_text = over_font.render("GAME OVER", True, (255, 255, 255))
     screen.blit(over_text, (200, 250))
@@ -114,9 +114,11 @@ while running:
         # if keystroke is pressed check whether its right or left
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                playerX_change = -5
+                #speed of player or moving of image 7pixel per click
+                playerX_change = -7
             if event.key == pygame.K_RIGHT:
-                playerX_change = 5
+                playerX_change = 7
+            
             if event.key == pygame.K_SPACE:
                 if bullet_state is "ready":
                     bulletSound = mixer.Sound("laser.wav")
@@ -124,19 +126,27 @@ while running:
                     # Get the current x cordinate of the spaceship
                     bulletX = playerX
                     fire_bullet(bulletX, bulletY)
-
+        
+        #release of key
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+             
+            
+             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                 #stop movement
                 playerX_change = 0
-
+   
+    #coordinate change 
     # 5 = 5 + -0.1 -> 5 = 5 - 0.1
     # 5 = 5 + 0.1
-
+    
+    #boundary for player so it doesnt go out 
     playerX += playerX_change
     if playerX <= 0:
         playerX = 0
-    elif playerX >= 736:
+    elif playerX >= 736: #64pixels size, stop at x coordinate 
         playerX = 736
+        
+    
 
     # Enemy Movement
     for i in range(num_of_enemies):
