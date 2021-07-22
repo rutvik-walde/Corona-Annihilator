@@ -18,7 +18,7 @@ mixer.music.load("background.wav")
 mixer.music.play(-1)
 
 # Caption and Icon
-pygame.display.set_caption("Corona Fighter")
+pygame.display.set_caption("Corona Annihilator")
 icon = pygame.image.load('logo.png')
 pygame.display.set_icon(icon)
 
