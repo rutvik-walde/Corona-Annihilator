@@ -28,6 +28,7 @@ playerX = 370
 playerY = 480
 playerX_change = 0
 
+
 # Enemy
 enemyImg = []
 enemyX = []
@@ -58,23 +59,29 @@ bullet_state = "ready"
 # Score
 
 score_value = 0
-font = pygame.font.Font('freesansbold.ttf', 32)
+font = pygame.font.Font('SgtJhonO-JRW07.ttf', 32)
 
-textX = 10
-testY = 10
+game_overX = 10
+game_overY = 10
+nameX = 490
+nameY = 10
 
-# Game Over
-over_font = pygame.font.Font('freesansbold.ttf', 64)
+# Game Over fonts
+over_font = pygame.font.Font('SgtJhonO-JRW07.ttf', 64)
+Game_name_font=pygame.font.Font('SgtJhonO-JRW07.ttf', 32)
 
 
 def show_score(x, y):
-    score = font.render("Score : " + str(score_value), True, (255, 255, 255))
+    score = font.render("Score " + str(score_value), True, (128,128,128))
     screen.blit(score, (x, y))
 
+def name(x, y):
+    Name = Game_name_font.render("Corona Annihilator" ,True, (128,128,128))
+    screen.blit(Name, (x, y))
     
 def game_over_text():
     over_text = over_font.render("GAME OVER", True, (255, 255, 255))
-    screen.blit(over_text, (200, 250))
+    screen.blit(over_text, (240, 270))
 
 
 def player(x, y):
@@ -114,8 +121,8 @@ while running:
         # if keystroke is pressed check whether its right or left
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                #speed of player or moving of image 7pixel per click
-                playerX_change = -7
+               
+                playerX_change = -7            
             if event.key == pygame.K_RIGHT:
                 playerX_change = 7
             
@@ -132,12 +139,10 @@ while running:
              
             
              if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                 #stop movement
+                #stop movement when release
                 playerX_change = 0
    
     #coordinate change 
-    # 5 = 5 + -0.1 -> 5 = 5 - 0.1
-    # 5 = 5 + 0.1
     
     #boundary for player so it doesnt go out 
     playerX += playerX_change
@@ -145,8 +150,7 @@ while running:
         playerX = 0
     elif playerX >= 736: #64pixels size, stop at x coordinate 
         playerX = 736
-        
-    
+         
 
     # Enemy Movement
     for i in range(num_of_enemies):
@@ -155,8 +159,8 @@ while running:
         if enemyY[i] > 440:
             for j in range(num_of_enemies):
                 enemyY[j] = 2000
-            game_over_text()
-            break
+            game_over_text()        #return to Game over
+            break                       
 
         enemyX[i] += enemyX_change[i]
         if enemyX[i] <= 0:
@@ -187,7 +191,10 @@ while running:
     if bullet_state is "fire":
         fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_change
+    
 
     player(playerX, playerY)
-    show_score(textX, testY)
+    show_score(game_overX, game_overY)
+    name(nameX, nameY)
+    
     pygame.display.update()
