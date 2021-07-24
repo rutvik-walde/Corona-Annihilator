@@ -10,4 +10,6 @@ Your are Humanity's Last Hope.......
 
 
 
-The Game has been wrtitten in Python,however you will need to install the pygame library.The game is simply plug and play,just run the main.py file.Comments have been added for better understanding.
+The Game has been wrtitten in Python,however you will need to install the pygame library.The game is simply plug and play, just run the "main.py" file.
+Comments have been added for better understanding.
+The font must be installed in the system first, double click on the "SgtJhonO-JRW07" file to install it.
